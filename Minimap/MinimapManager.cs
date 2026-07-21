@@ -72,7 +72,8 @@ namespace MinimapMod
             var mapGO = new GameObject("MapRawImage");
             mapGO.transform.SetParent(canvasGO.transform, false);
             mapImage = mapGO.AddComponent<RawImage>();
-            mapImage.texture = mapTexture;
+            mapImage.texture = null;
+            mapImage.color = new Color(0f, 0f, 0f, 0.6f);
             var mapRect = mapImage.rectTransform;
             mapRect.anchorMin = new Vector2(1f, 1f);
             mapRect.anchorMax = new Vector2(1f, 1f);
@@ -83,6 +84,8 @@ namespace MinimapMod
             var borderImg = mapGO.AddComponent<Outline>();
             borderImg.effectColor = Color.white;
             borderImg.effectDistance = new Vector2(2f, 2f);
+
+            mapGO.AddComponent<RectMask2D>();
 
             var layerGO = new GameObject("IconLayer");
             layerGO.transform.SetParent(mapGO.transform, false);
@@ -96,7 +99,7 @@ namespace MinimapMod
             arrowGO.transform.SetParent(iconLayer, false);
             playerFacingArrow = arrowGO.AddComponent<Image>();
             playerFacingArrow.sprite = Resources.GetBuiltinResource<Sprite>("UI/Skin/UISprite.psd");
-            playerFacingArrow.color = Color.cyan;
+            playerFacingArrow.color = Color.green;
             var arRect = playerFacingArrow.rectTransform;
             arRect.sizeDelta = new Vector2(10f, 10f);
             arRect.anchoredPosition = Vector2.zero;
