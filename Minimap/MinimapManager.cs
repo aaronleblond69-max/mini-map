@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameNetcodeStuff;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,10 +7,9 @@ namespace MinimapMod
 {
     public class MinimapManager : MonoBehaviour
     {
-        // --- config ---
         private const int MapPixelSize = 220;
-        private const float OrthoSize = 15f;      // zoom (plus petit = plus zoomé)
-        private const float MaxIconRange = 15f;   // doit correspondre a OrthoSize
+        private const float OrthoSize = 15f;
+        private const float MaxIconRange = 15f;
         private const float LootRefreshInterval = 1f;
 
         private Camera mapCamera;
@@ -68,7 +68,6 @@ namespace MinimapMod
             canvas.sortingOrder = 30;
             canvasGO.AddComponent<CanvasScaler>();
 
-            // fond / rendu camera
             var mapGO = new GameObject("MapRawImage");
             mapGO.transform.SetParent(canvasGO.transform, false);
             mapImage = mapGO.AddComponent<RawImage>();
@@ -80,12 +79,10 @@ namespace MinimapMod
             mapRect.sizeDelta = new Vector2(MapPixelSize, MapPixelSize);
             mapRect.anchoredPosition = new Vector2(-20f, -20f);
 
-            // bordure simple
             var borderImg = mapGO.AddComponent<Outline>();
             borderImg.effectColor = Color.white;
             borderImg.effectDistance = new Vector2(2f, 2f);
 
-            // calque des icones, au-dessus de la map, meme rect
             var layerGO = new GameObject("IconLayer");
             layerGO.transform.SetParent(mapGO.transform, false);
             iconLayer = layerGO.AddComponent<RectTransform>();
@@ -94,7 +91,6 @@ namespace MinimapMod
             iconLayer.offsetMin = Vector2.zero;
             iconLayer.offsetMax = Vector2.zero;
 
-            // fleche du joueur local (fixe au centre, tourne avec la vue)
             var arrowGO = new GameObject("LocalArrow");
             arrowGO.transform.SetParent(iconLayer, false);
             playerFacingArrow = arrowGO.AddComponent<Image>();
