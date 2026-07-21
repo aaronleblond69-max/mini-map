@@ -1,5 +1,6 @@
 using BepInEx;
 using BepInEx.Logging;
+using GameNetcodeStuff;
 using HarmonyLib;
 
 namespace MinimapMod
@@ -24,7 +25,6 @@ namespace MinimapMod
         }
     }
 
-    // Ajoute le composant minimap au joueur local des qu'il spawn.
     [HarmonyPatch(typeof(PlayerControllerB), "ConnectClientToPlayerObject")]
     public class PlayerControllerB_Connect_Patch
     {
