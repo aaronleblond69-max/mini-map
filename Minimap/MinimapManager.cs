@@ -7,9 +7,10 @@ namespace MinimapMod
 {
     public class MinimapManager : MonoBehaviour
     {
-        private const int MapPixelSize = 220;
-        private const float OrthoSize = 15f;
-        private const float MaxIconRange = 15f;
+        // --- config ---
+        private const int MapPixelSize = 350;
+        private const float OrthoSize = 20f;      // zoom (plus petit = plus zoomé)
+        private const float MaxIconRange = 20f;   // doit correspondre a OrthoSize
         private const float LootRefreshInterval = 1f;
 
         private Camera mapCamera;
