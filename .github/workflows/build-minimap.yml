@@ -16,11 +16,14 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
+      - name: Clear nuget cache
+        run: dotnet nuget locals all --clear
+
       - name: Restore
-        run: dotnet restore Minimap/MinimapMod.csproj
+        run: dotnet restore Minimap/MinimapMod.csproj --force --no-cache -v detailed
 
       - name: Build
-        run: dotnet build Minimap/MinimapMod.csproj -c Release
+        run: dotnet build Minimap/MinimapMod.csproj -c Release --no-restore -v detailed
 
       - name: Upload DLL
         uses: actions/upload-artifact@v4
